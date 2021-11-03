@@ -14,9 +14,14 @@ provider "thousandeyes" {
 
 
 locals {
-  icmp_tests = {
-    "Bookinfo NAT" = {
-      server = "64.104.255.140"
+  http_tests = {
+    "Bookinfo Normal" = {
+      // server = "64.104.255.140"
+      url = "http://64.104.255.140:8080/productpage?u=normal"
+    },
+    "Bookinfo Test" = {
+      // server = "64.104.255.140"
+      url = "http://64.104.255.140:8080/productpage?u=test"
     }
   }
 }
@@ -80,32 +85,44 @@ data "thousandeyes_agent" "agent" {
 //     }
 // }
 
-resource "thousandeyes_agent_to_server" "icmp_tests" {
-  for_each = local.icmp_tests
+resource "thousandeyes_http_server" "http_tests" {
+  for_each = local.http_tests
 
-  test_name = "Ping ${each.key}"
+  name = "Web - ${each.key}"
   interval = 60
-  server = each.value.server
+  url = each.value.url
+
   agents {
       agent_id = data.thousandeyes_agent.agent.agent_id
   }
-
-  protocol = "ICMP"
-
-  network_measurements = 1
-  mtu_measurements = 0
-  bandwidth_measurements = 0
-  bgp_measurements = 1
-  use_public_bgp = 1
-
-  // alert_rules {
-  //   rule_id = 1575407
-  // }
-  //
-  // alert_rules {
-  //   rule_id = 1575406
-  // }
 }
+
+// resource "thousandeyes_agent_to_server" "icmp_tests" {
+//   for_each = local.icmp_tests
+//
+//   test_name = "Ping ${each.key}"
+//   interval = 60
+//   server = each.value.server
+//   agents {
+//       agent_id = data.thousandeyes_agent.agent.agent_id
+//   }
+//
+//   protocol = "ICMP"
+//
+//   network_measurements = 1
+//   mtu_measurements = 0
+//   bandwidth_measurements = 0
+//   bgp_measurements = 1
+//   use_public_bgp = 1
+//
+//   // alert_rules {
+//   //   rule_id = 1575407
+//   // }
+//   //
+//   // alert_rules {
+//   //   rule_id = 1575406
+//   // }
+// }
 
 // resource "thousandeyes_agent_to_server" "tcp_tests" {
 //   for_each = local.tcp_tests
