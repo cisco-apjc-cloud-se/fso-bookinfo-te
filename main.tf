@@ -88,7 +88,7 @@ data "thousandeyes_agent" "agent" {
 resource "thousandeyes_http_server" "http_tests" {
   for_each = local.http_tests
 
-  name = "Web - ${each.key}"
+  test_name = "Web - ${each.key}"
   interval = 60
   url = each.value.url
 
