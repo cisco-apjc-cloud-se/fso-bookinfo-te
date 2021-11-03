@@ -84,7 +84,7 @@ resource "thousandeyes_agent_to_server" "icmp_tests" {
   for_each = local.icmp_tests
 
   test_name = "Ping ${each.key}"
-  interval = 600
+  interval = 60
   server = each.value.server
   agents {
       agent_id = data.thousandeyes_agent.agent.agent_id
@@ -95,8 +95,8 @@ resource "thousandeyes_agent_to_server" "icmp_tests" {
   network_measurements = 1
   mtu_measurements = 0
   bandwidth_measurements = 0
-  bgp_measurements = 0
-  use_public_bgp = 0
+  bgp_measurements = 1
+  use_public_bgp = 1
 
   // alert_rules {
   //   rule_id = 1575407
