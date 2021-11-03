@@ -98,13 +98,13 @@ resource "thousandeyes_agent_to_server" "icmp_tests" {
   bgp_measurements = 0
   use_public_bgp = 0
 
-  alert_rules {
-    rule_id = 1575407
-  }
-
-  alert_rules {
-    rule_id = 1575406
-  }
+  // alert_rules {
+  //   rule_id = 1575407
+  // }
+  //
+  // alert_rules {
+  //   rule_id = 1575406
+  // }
 }
 
 // resource "thousandeyes_agent_to_server" "tcp_tests" {
