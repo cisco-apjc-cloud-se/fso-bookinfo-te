@@ -92,11 +92,11 @@ resource "thousandeyes_http_server" "http_tests" {
   interval = 60
   url = each.value.url
 
-  network_measurements = 1
+  network_measurements = 0
   mtu_measurements = 0
   bandwidth_measurements = 0
-  bgp_measurements = 1
-  use_public_bgp = 1
+  bgp_measurements = 0
+  use_public_bgp = 0
 
   agents {
       agent_id = data.thousandeyes_agent.agent.agent_id
