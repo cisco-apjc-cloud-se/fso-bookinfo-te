@@ -96,6 +96,7 @@ resource "thousandeyes_http_server" "http_tests" {
 
   content_regex = ".*"
 
+  // NOTE: Bug with API/Provider?  Need to save test in GUI to match settings
   network_measurements = 1
   mtu_measurements = 1
   bandwidth_measurements = 0
