@@ -96,12 +96,12 @@ resource "thousandeyes_http_server" "http_tests" {
 
   content_regex = ".*"
 
-  network_measurements = 0
+  network_measurements = 1
   mtu_measurements = 0
   bandwidth_measurements = 0
   bgp_measurements = 0
   use_public_bgp = 0
-  num_path_traces = 0
+  // num_path_traces = 0
 
   dynamic "agents" {
     for_each = toset(var.agent_list)
