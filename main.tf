@@ -92,6 +92,8 @@ resource "thousandeyes_http_server" "http_tests" {
   interval = 60
   url = each.value.url
 
+  content_regex = ".*"
+
   network_measurements = 0
   mtu_measurements = 0
   bandwidth_measurements = 0
