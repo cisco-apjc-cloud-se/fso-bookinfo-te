@@ -101,7 +101,7 @@ resource "thousandeyes_http_server" "http_tests" {
   bandwidth_measurements = 0
   bgp_measurements = 0
   use_public_bgp = 0
-  numPathTraces = 0
+  num_path_traces = 0
 
   dynamic "agents" {
     for_each = toset(var.agent_list)
