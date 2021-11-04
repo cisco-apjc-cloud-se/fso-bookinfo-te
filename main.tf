@@ -96,7 +96,7 @@ resource "thousandeyes_http_server" "http_tests" {
 
   content_regex = ".*"
 
-  network_measurements = 1
+  network_measurements = 0
   mtu_measurements = 0
   bandwidth_measurements = 0
   bgp_measurements = 0
