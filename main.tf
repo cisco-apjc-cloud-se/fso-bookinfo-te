@@ -26,8 +26,10 @@ locals {
   }
 }
 
-data "thousandeyes_agent" "agent" {
-  agent_name  = "Sydney, Australia"
+
+data "thousandeyes_agent" "agents" {
+  for_each = toset(var.agent_list)
+  agent_name  = each.key
 }
 
 //
@@ -95,14 +97,21 @@ resource "thousandeyes_http_server" "http_tests" {
   content_regex = ".*"
 
   network_measurements = 0
-  mtu_measurements = 0
+  // mtu_measurements = 0
   bandwidth_measurements = 0
-  bgp_measurements = 0
-  use_public_bgp = 0
+  // bgp_measurements = 0
+  // use_public_bgp = 0
 
-  agents {
-      agent_id = data.thousandeyes_agent.agent.agent_id
+  dynamic "agents" {
+    for_each = toset(var.agent_list)
+    content {
+      agent_id = data.thousandeyes_agent.agents[agents.key].agent_id
+    }
   }
+
+  // agents {
+  //     agent_id = data.thousandeyes_agent.agent.agent_id
+  // }
 }
 
 // resource "thousandeyes_agent_to_server" "icmp_tests" {
